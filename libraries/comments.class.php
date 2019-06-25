@@ -37,4 +37,28 @@ class Comment
 
         mysql::query($query);
     }
+
+    public function getCommentsList()
+    {
+        $query = "  SELECT id, email, name, text, date, parent_id
+                    FROM {$this->comments_table}
+                    WHERE parent_id IS NULL
+                    ORDER BY id DESC";
+
+        $data = mysql::select($query);
+
+        return $data;
+    }
+
+    public function getChildComments($parentId)
+    {
+        $query = "  SELECT id, email, name, text, date, parent_id
+                    FROM {$this->comments_table}
+                    WHERE parent_id = '{$parentId}'
+                    ORDER BY id DESC";
+
+        $data = mysql::select($query);
+
+        return $data;
+    }
 }

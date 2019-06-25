@@ -10,6 +10,8 @@
 
     $elementCount = $commentsObj->getCommentsCount();
 
+    $comments = $commentsObj->getCommentsList();
+
     $formErrors = [];
     $data = [];
     $required = ['email', 'name', 'text'];

@@ -7,10 +7,12 @@
         <link rel="stylesheet" type="text/css" href="styles/main.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+        <script src="https://kit.fontawesome.com/1ef1bc7d46.js"></script>
+
         <title>Comments system</title>
     </head>
     <body>
-        <div class="container mt-5">
+        <div class="container mt-5 mb-5">
 
             <div class="row">
                 <div class="col-10 col-lg-8 col-offset-1">
@@ -36,7 +38,7 @@
                                     <?php
                                     if(in_array("name", $formErrors)) {
                                         echo '
-                                                <small id="name-error" class="form-text text-muted validation-error">Given name is too long.</small>
+                                                <small id="name-error" class="validation-error form-text text-muted">Given name is too long.</small>
                                             ';
                                     }
                                     ?>
@@ -48,9 +50,16 @@
                             <textarea class="form-control" id="text-input" name="text" aria-describedby="text-error" placeholder="Type comment here..." rows="3" required><?php if(isset($data['text'])) echo $data['text']; ?></textarea>
                             <?php
                             if(in_array("text", $formErrors)) {
-                                echo '
-                                    <small id="text-error" class="form-text text-muted validation-error">Maximum length of comment is 1.000 symbols.</small>
-                                ';
+                                if(strlen($data['text']) > 1000) {
+                                    echo '
+                                        <small id="text-error" class="form-text text-muted validation-error">Maximum length of comment is 1.000 symbols.</small>
+                                    ';
+                                } else {
+
+                                    echo '
+                                        <small id="text-error" class="form-text text-muted validation-error">Not allowed symbols were found in your comment.</small>
+                                    ';
+                                }
                             }
                             ?>
                         </div>
@@ -70,6 +79,28 @@
                         <div id="comments-count">
                             <?php echo $elementCount ?> Comments
                         </div>
+
+                        <?php
+
+                            foreach($comments as $key => $val) {
+
+                                echo '
+                                    <div id="comment-'. $val['id'] .'" class="comment-parent">
+                                        <span class="comment-name">'. $val['name'] .'</span> &nbsp; <small><span class="comment-date">'. $val['date'] .'</span></small>
+                                        <span class="comment-reply"><a href="#"><i class="fas fa-reply"></i> Reply</a></span>
+                                        <p class="comment-text">'. $val['text'] .'</p>
+                                    </div>
+                                ';
+
+                                $childComments = $commentsObj->getChildComments($val['id']);
+
+                                foreach ($childComments as $key2 => $val2) {
+
+                                    echo 'Child comment '. $val2['id'];
+                                }
+                            }
+
+                        ?>
 
                     </div>
 

@@ -2,3 +2,42 @@
     color: #ff1437;
     font-weight: bold;
 }
+
+.validation-error {
+    color: #ff1437;
+}
+
+.comment-parent {
+    width: 80%;
+    height: auto;
+    border: 1px solid gainsboro;
+    background-color: #f9f9f9;
+    margin-top: 15px;
+    padding: 8px 12px 8px 12px;
+    border-radius: 5px;
+    color: #3c040d;
+    font-family: Calibri;
+}
+
+.comment-name {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.comment-text {
+    text-align: justify;
+    margin-top: 8px;
+}
+
+.comment-reply {
+    float: right;
+}
+
+.comment-reply a {
+    color: #3c040d;
+}
+
+.comment-reply a:hover {
+    color: #3c040d;
+    text-decoration: underline;
+}
