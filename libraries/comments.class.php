@@ -17,4 +17,24 @@ class Comment
 
         return $data[0]['count'];
     }
+
+    public function insertComment($data)
+    {
+        $query = "  INSERT INTO {$this->comments_table}
+                    (
+                        email,
+                        name,
+                        text,
+                        date,
+                        level
+                    ) VALUES (
+                        '{$data['email']}',
+                        '{$data['name']}',
+                        '{$data['text']}',
+                        '{$data['date']}',
+                        '{$data['level']}'
+                    )";
+
+        mysql::query($query);
+    }
 }
