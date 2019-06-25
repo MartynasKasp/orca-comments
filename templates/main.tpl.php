@@ -14,7 +14,7 @@
     <body>
         <div class="container mt-5 mb-5">
 
-            <div class="row">
+            <div class="row mb-5 d-flex justify-content-center">
                 <div class="col-10 col-lg-8 col-offset-1">
                     <form action="" method="post">
                         <div class="form-row">
@@ -70,14 +70,12 @@
 
             <hr>
 
-            <div class="row">
-
+            <div class="row mt-5">
                 <div class="col">
-
                     <div id="comments-table">
 
                         <div id="comments-count">
-                            <?php echo $elementCount ?> Comments
+                            <h2><?php echo $elementCount ?> Comments</h2>
                         </div>
 
                         <?php
@@ -96,7 +94,12 @@
 
                                 foreach ($childComments as $key2 => $val2) {
 
-                                    echo 'Child comment '. $val2['id'];
+                                    echo '
+                                    <div id="comment-'. $val2['id'] .'" class="comment-child">
+                                        <span class="comment-name">'. $val2['name'] .'</span> &nbsp; <small><span class="comment-date">'. $val2['date'] .'</span></small>
+                                        <p class="comment-text">'. $val2['text'] .'</p>
+                                    </div>
+                                ';
                                 }
                             }
 
