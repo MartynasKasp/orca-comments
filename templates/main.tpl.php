@@ -11,15 +11,21 @@
     <body>
         <div class="container mt-5">
 
-            <div class="row">
-
-                <div class="col">
-
-                    <h3>Input form</h3>
-
+            <form>
+                <div class="form-group">
+                    <label for="emailInput">Email address <span class="requiredField">*</span></label>
+                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailError" placeholder="example@email.com">
                 </div>
-
-            </div>
+                <div class="form-group">
+                    <label for="nameInput">Name <span class="requiredField">*</span></label>
+                    <input type="text" class="form-control" id="nameInput" aria-describedby="nameError" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label for="textInput">Comment <span class="requiredField">*</span></label>
+                    <textarea class="form-control" id="nameInput" aria-describedby="nameError" placeholder="Type comment here..." rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </form>
 
             <hr>
 
