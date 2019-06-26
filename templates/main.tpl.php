@@ -28,35 +28,23 @@
                                 <div class="form-group">
                                     <label for="email-input">Email address <span class="required-field">*</span></label>
                                     <input type="email" class="form-control" name="email" id="email-input" aria-describedby="email-error" placeholder="example@email.com" value="<?php echo isset($data['email']) ? $data['email'] : ''; ?>" required>
-                                    <?php
-                                        if(in_array("email", $formErrors)) {
-                                            echo '
-                                                <small id="email-error" class="form-text validation-error">Given email address is invalid.</small>
-                                            ';
-                                        }
-                                    ?>
+                                    <!--<small id="email-error" class="form-text validation-error">Given email address is invalid.</small>-->
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="name-input">Name <span class="required-field">*</span></label>
                                     <input type="text" class="form-control" name="name" id="name-input" aria-describedby="name-error" placeholder="John Smith" value="<?php echo isset($data['name']) ? $data['name'] : ''; ?>" required>
-                                    <?php
-                                    if(in_array("name", $formErrors)) {
-                                        echo '
-                                                <small id="name-error" class="validation-error form-text text-muted">Given name is too long.</small>
-                                            ';
-                                    }
-                                    ?>
+                                    <!--<small id="name-error" class="validation-error form-text text-muted">Given name is too long.</small>-->
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="text-input">Comment <span class="required-field">*</span></label>
-                            <textarea class="form-control" id="text-input" name="text" placeholder="Type comment here..." rows="3" required><?php if(isset($data['text'])) echo $data['text']; ?></textarea>
-                            <div id="character-count" class="text-muted">Characters left: 1000</div>
+                            <textarea class="form-control" id="text-input" name="text" placeholder="Type comment here..." rows="3" maxlength="1000" required><?php if(isset($data['text'])) echo $data['text']; ?></textarea>
+                            <span id="character-count" class="text-muted comment-length">Characters left: 1000</span>
                         </div>
-                        <input type="submit" class="btn btn-danger" value="Comment" name="comment">
+                        <input type="button" class="btn btn-danger" value="Comment" id="comment">
                     </form>
 
                 </div>
@@ -68,10 +56,7 @@
 
             <div class="row mt-5">
                 <div class="col">
-                    <div id="comments-wrapper">
-
-                    </div>
-
+                    <div id="comments-wrapper"></div>
                 </div>
 
             </div>
@@ -105,7 +90,7 @@
                         type: "post",
                         async: true,
                         data: {
-                            "done": 1,
+                            "comment": 1,
                             "email": email,
                             "name": name,
                             "text": text,
@@ -117,16 +102,45 @@
                         }
                     });
                 });
+
+                $("#comment").click(function() {
+
+                    let email = $("#email-input").val(),
+                        name = $("#name-input").val(),
+                        text = $("#text-input").val();
+
+                    $.ajax({
+                        url: "ajax_requests.php",
+                        type: "post",
+                        async: true,
+                        data: {
+                            "comment": 1,
+                            "email": email,
+                            "name": name,
+                            "text": text
+                        },
+                        success: function(){
+                            displayAllComments();
+                            $("#email-input").val('');
+                            $("#name-input").val('');
+                            $("#text-input").val('');
+                        }
+                    });
+                });
             });
 
-            $('textarea').keyup(function() {
-                $("#comment-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
+            $(document).on("keyup", "#text-input", function() {
+                $("#character-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
+            });
+
+            $(document).on("keyup", "#reply-text-input", function() {
+                $("#reply-character-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
             });
 
             function displayAllComments(){
 
                 $.ajax({
-                    url: "ajax_functions.php",
+                    url: "ajax_requests.php",
                     type: "post",
                     async: true,
                     data: {
@@ -169,10 +183,10 @@
                         </div>
                         <div class="form-group">
                             <label for="reply-text-input">Comment <span class="required-field">*</span></label>
-                            <textarea class="form-control" id="reply-text-input" name="text" placeholder="Type reply to comment here..." rows="3" required></textarea>
-                            <div id="character-count" class="text-muted"></small>Characters left: 1000</small></div>
+                            <textarea class="form-control" id="reply-text-input" name="text" placeholder="Type reply to comment here..." rows="3" maxlength="1000" required></textarea>
+                            <span id="reply-character-count" class="text-muted comment-length">Characters left: 1000</span>
                         </div>
-                        <input type="button" class="btn btn-danger" value="Reply" id="reply" data-id="${commentId}"></input>
+                        <input type="button" class="btn btn-danger" value="Reply" id="reply" data-id="${commentId}">
 
                     </form>
                     `;

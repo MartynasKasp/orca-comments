@@ -18,7 +18,7 @@ class Comment
         return $data[0]['count'];
     }
 
-    public function insertComment($data)
+    /*public function insertComment($data)
     {
         $query = "  INSERT INTO {$this->comments_table}
                     (
@@ -34,6 +34,24 @@ class Comment
                     )";
 
         mysql::query($query);
+    }*/
+
+    public function insertComment($email, $name, $text)
+    {
+        $query = "  INSERT INTO {$this->comments_table}
+                    (
+                        email,
+                        name,
+                        text,
+                        date
+                    ) VALUES (
+                        '{$email}',
+                        '{$name}',
+                        '{$text}',
+                        '". date("Y-m-d") ."'
+                    )";
+
+        mysql::query($query) or die(mysql::error());
     }
 
     public function insertChildComment($email, $name, $text, $parentId)

@@ -75,3 +75,9 @@
     border-radius: 10px;
     background-color: #fcfcfc;
 }
+
+.comment-length {
+    float: right;
+    font-size: 12px;
+    margin-top: 5px;
+}
