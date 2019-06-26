@@ -81,3 +81,11 @@
     font-size: 12px;
     margin-top: 5px;
 }
+
+.float-left {
+    float: left;
+}
+
+#comment {
+    position: absolute;
+}
