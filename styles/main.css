@@ -89,3 +89,7 @@
 #comment {
     position: absolute;
 }
+
+.input-error {
+    border: 1px solid #c5191c;
+}

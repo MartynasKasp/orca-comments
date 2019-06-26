@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles/main.css"/>
 
         <script src="https://kit.fontawesome.com/1ef1bc7d46.js"></script>
 
@@ -34,7 +35,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="name-input">Name <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" name="name" id="name-input" aria-describedby="name-error" placeholder="John Smith">
+                                    <input type="text" class="form-control" name="name" id="name-input" aria-describedby="name-error" placeholder="Enter a name">
                                     <small id="name-error" class="validation-error form-text"></small>
                                 </div>
                             </div>
@@ -45,7 +46,7 @@
                             <small id="text-error" class="validation-error form-text float-left"></small>
                             <span id="character-count" class="text-muted comment-length">Characters left: 1000</span>
                         </div>
-                        <br><input type="button" class="btn btn-danger" value="Comment" id="comment">
+                        <br><input type="button" class="btn btn-danger" value="Comment" id="comment"><br>
                     </form>
 
                 </div>

@@ -12,34 +12,42 @@ $(document).ready(function() {
 
         if(!email) {
             $("#reply-email-error").html("This field cannot be empty!");
+            $("#reply-email-input").addClass("input-error");
             validationError = true;
         }
         else if(!isEmail(email)) {
             $("#reply-email-error").html("Please enter a valid email address.");
+            $("#reply-email-input").addClass("input-error");
             validationError = true;
         }
         else {
             $("#reply-email-error").html("");
+            $("#reply-email-input").addClass("input-error");
         }
 
         if(!name) {
             $("#reply-name-error").html("This field cannot be empty!");
+            $("#reply-name-input").addClass("input-error");
             validationError = true;
         }
         else if(name.length > 60) {
             $("#reply-name-error").html("Maximum number of characters is 60.");
+            $("#reply-name-input").addClass("input-error");
             validationError = true;
         }
         else {
             $("#reply-name-error").html("");
+            $("#reply-name-input").removeClass("input-error");
         }
 
         if(!text) {
             $("#reply-text-error").html("You must write a message!");
+            $("#reply-text-input").addClass("input-error");
             validationError = true;
         }
         else {
             $("#reply-text-error").html("");
+            $("#reply-text-input").removeClass("input-error");
         }
 
         if(!validationError) {
@@ -47,6 +55,9 @@ $(document).ready(function() {
             $("#reply-email-error").html("");
             $("#reply-name-error").html("");
             $("#reply-text-error").html("");
+            $("#reply-email-input").removeClass("input-error");
+            $("#reply-name-input").removeClass("input-error");
+            $("#reply-text-input").removeClass("input-error");
 
             $.ajax({
                 url: "ajax_requests.php",
@@ -76,31 +87,42 @@ $(document).ready(function() {
 
         if(!email) {
             $("#email-error").html("This field cannot be empty!");
+            $("#email-input").addClass("input-error");
             validationError = true;
         }
         else if(!isEmail(email)) {
             $("#email-error").html("Please enter a valid email address.");
+            $("#email-input").addClass("input-error");
             validationError = true;
         }
         else {
             $("#email-error").html("");
+            $("#email-input").removeClass("input-error");
         }
 
         if(!name) {
             $("#name-error").html("This field cannot be empty!");
+            $("#name-input").addClass("input-error");
             validationError = true;
         }
         else if(name.length > 60) {
             $("#name-error").html("Maximum number of characters is 60.");
+            $("#name-input").addClass("input-error");
             validationError = true;
         }
         else {
             $("#name-error").html("");
+            $("#name-input").removeClass("input-error");
         }
 
         if(!text) {
             $("#text-error").html("You must write a message!");
+            $("#text-input").addClass("input-error");
             validationError = true;
+        }
+        else {
+            $("#text-error").html("");
+            $("#text-input").removeClass("input-error");
         }
 
         if(!validationError) {
@@ -108,6 +130,9 @@ $(document).ready(function() {
             $("#email-error").html("");
             $("#name-error").html("");
             $("#text-error").html("");
+            $("#email-input").removeClass("input-error");
+            $("#name-input").removeClass("input-error");
+            $("#text-input").removeClass("input-error");
 
             $.ajax({
                 url: "ajax_requests.php",
@@ -178,7 +203,7 @@ function showReplyForm(commentId){
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="reply-name-input">Name <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" name="name" id="reply-name-input" aria-describedby="name-error" placeholder="John Smith">
+                                    <input type="text" class="form-control" name="name" id="reply-name-input" aria-describedby="name-error" placeholder="Enter a name">
                                     <small id="reply-name-error" class="validation-error form-text"></small>
                                 </div>
                             </div>

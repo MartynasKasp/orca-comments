@@ -33,7 +33,7 @@ class Comment
                         '". date("Y-m-d") ."'
                     )";
 
-        mysql::query($query) or die(mysql::error());
+        mysql::query($query);
     }
 
     public function insertChildComment($email, $name, $text, $parentId)
@@ -53,7 +53,7 @@ class Comment
                         '{$parentId}'
                     )";
 
-        mysql::query($query) or die(mysql::error());
+        mysql::query($query);
     }
 
     public function getCommentsList()
