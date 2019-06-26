@@ -4,12 +4,13 @@
 }
 
 .validation-error {
-    color: #ff1437;
+    color: #c5191c;
 }
 
-.comments-table {
+#comments-wrapper {
     font-family: Calibri;
     color: #3c040d;
+    margin-left: 15%;
 }
 
 .comment-parent {
@@ -27,7 +28,7 @@
     margin-left: 10%;
     height: auto;
     border: 1px solid gainsboro;
-    background-color: #f5f5f5;
+    background-color: #fafafa;
     margin-top: 10px;
     padding: 8px 12px 8px 12px;
     border-radius: 5px;
@@ -62,4 +63,21 @@
 .comment-reply a:hover {
     color: #3c040d;
     text-decoration: underline;
+}
+
+#reply-form {
+    width: 60%;
+    margin-top: 15px;
+    margin-left: 10%;
+    margin-bottom: 15px;
+    border: 1px solid gainsboro;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+}
+
+.comment-length {
+    float: right;
+    font-size: 12px;
+    margin-top: 5px;
 }
