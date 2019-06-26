@@ -7,11 +7,14 @@
 
     $commentsObj = new Comment();
 
-    $email = mysql::escape($_POST['email']);
-    $name = mysql::escape($_POST['name']);
-    $text = mysql::escape($_POST['text']);
-    $parentId = $_POST['parent_id'];
+    if(isset($_POST['done'])) {
 
-    $commentsObj->insertChildComment(
-        $email, $name, $text, $parentId
-    );
+        $email = mysql::escape($_POST['email']);
+        $name = mysql::escape($_POST['name']);
+        $text = mysql::escape($_POST['text']);
+        $parentId = $_POST['parent_id'];
+
+        $commentsObj->insertChildComment(
+            $email, $name, $text, $parentId
+        );
+    }

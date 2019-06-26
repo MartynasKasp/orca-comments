@@ -126,8 +126,6 @@
 
                 $(document).on("click", "#reply", function() {
 
-                    console.log("Button was clicked");
-
                     let email = $("#reply-email-input").val(),
                         name = $("#reply-name-input").val(),
                         text = $("#reply-text-input").val(),
@@ -145,7 +143,7 @@
                             "parent_id": parentId
                         },
                         success: function(data){
-
+                            hideReplyForm();
                         }
                     });
                 });
@@ -154,6 +152,10 @@
             $('textarea').keyup(function() {
                 $("#comment-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
             });
+
+            function displayNewComment(){
+
+            }
 
             function showReplyForm(commentId){
 
