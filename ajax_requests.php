@@ -7,17 +7,6 @@
 
     $commentsObj = new Comment();
 
-    /*if(isset($_POST['reply'])) {
-
-        $email = mysql::escape($_POST['email']);
-        $name = mysql::escape($_POST['name']);
-        $text = mysql::escape($_POST['text']);
-
-        $commentsObj->insertComment(
-            $email, $name, $text, $_POST['parent_id']
-        );
-    }*/
-
     if(isset($_POST['comment'])) {
 
         $email = mysql::escape($_POST['email']);
