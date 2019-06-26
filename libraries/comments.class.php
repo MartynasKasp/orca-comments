@@ -25,17 +25,35 @@ class Comment
                         email,
                         name,
                         text,
-                        date,
-                        level
+                        date
                     ) VALUES (
                         '{$data['email']}',
                         '{$data['name']}',
                         '{$data['text']}',
-                        '{$data['date']}',
-                        '{$data['level']}'
+                        '{$data['date']}'
                     )";
 
         mysql::query($query);
+    }
+
+    public function insertChildComment($email, $name, $text, $parentId)
+    {
+        $query = "  INSERT INTO {$this->comments_table}
+                    (
+                        email,
+                        name,
+                        text,
+                        date,
+                        parent_id
+                    ) VALUES (
+                        '{$email}',
+                        '{$name}',
+                        '{$text}',
+                        '". date("Y-m-d") ."',
+                        '{$parentId}'
+                    )";
+
+        mysql::query($query) or die(mysql::error());
     }
 
     public function getCommentsList()

@@ -13,20 +13,19 @@
     $comments = $commentsObj->getCommentsList();
 
     $formErrors = [];
+    $replyFormErrors = [];
     $data = [];
-    $required = ['email', 'name', 'text'];
+    $required = ['email', 'name'];
     $maxLengths = [
         'email' => 256,
-        'name' => 60,
-        'text' => 1000
+        'name' => 60
     ];
 
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['comment'])) {
 
         $validations = [
             'email' => 'email',
-            'name' => 'alfanum',
-            'text' => 'alfanum'
+            'name' => 'alfanum'
         ];
 
         include 'utils/validator.class.php';
@@ -36,7 +35,6 @@
 
             $dataPrepared = $validator->preparePostFieldsForSQL();
             $dataPrepared['date'] = date("Y-m-d");
-            $dataPrepared['level'] = 1;
             $commentsObj->insertComment($dataPrepared);
 
             header("Location: index.php");

@@ -4,10 +4,10 @@
 }
 
 .validation-error {
-    color: #ff1437;
+    color: #c5191c;
 }
 
-.comments-table {
+#comments-wrapper {
     font-family: Calibri;
     color: #3c040d;
 }
@@ -62,4 +62,10 @@
 .comment-reply a:hover {
     color: #3c040d;
     text-decoration: underline;
+}
+
+#reply-form {
+    width: 60%;
+    margin-top: 10px;
+    margin-left: 10%;
 }
