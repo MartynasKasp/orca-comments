@@ -62,7 +62,7 @@
 
 .comment-reply a:hover {
     color: #3c040d;
-    text-decoration: underline;
+    text-decoration: underline;;
 }
 
 #reply-form {
@@ -92,4 +92,11 @@
 
 .input-error {
     border: 1px solid #c5191c;
+}
+
+.reply-close-button a {
+    float:right;
+    margin-top: 10px;
+    color: #3c040d;
+    text-decoration: none;
 }

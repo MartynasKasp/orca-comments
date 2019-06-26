@@ -149,6 +149,7 @@ $(document).ready(function() {
                     $("#email-input").val('');
                     $("#name-input").val('');
                     $("#text-input").val('');
+                    $("#character-count").html("Characters left: 1000");
                 }
             });
         }
@@ -212,9 +213,10 @@ function showReplyForm(commentId){
                             <label for="reply-text-input">Comment <span class="required-field">*</span></label>
                             <textarea class="form-control" id="reply-text-input" name="text" placeholder="Type reply to comment here..." rows="3" maxlength="1000"></textarea>
                             <small id="reply-text-error" class="validation-error form-text float-left"></small>
-                            <span id="reply-character-count" class="text-muted comment-length">Characters left: 1000</span>
+                            <span id="reply-character-count" class="comment-length">Characters left: 1000</span>
                         </div>
                         <br><input type="button" class="btn btn-danger" value="Reply" id="reply" data-id="${commentId}">
+                        <span class="reply-close-button"><a href="javascript:hideReplyForm()"><i class="fas fa-times"></i> Close</a></span>
 
                     </form>
                     `;

@@ -44,7 +44,7 @@
                             <label for="text-input">Comment <span class="required-field">*</span></label>
                             <textarea class="form-control" id="text-input" name="text" placeholder="Type comment here..." rows="3" maxlength="1000"></textarea>
                             <small id="text-error" class="validation-error form-text float-left"></small>
-                            <span id="character-count" class="text-muted comment-length">Characters left: 1000</span>
+                            <span id="character-count" class="comment-length">Characters left: 1000</span>
                         </div>
                         <br><input type="button" class="btn btn-danger" value="Comment" id="comment"><br>
                     </form>
