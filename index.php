@@ -6,12 +6,6 @@
     include 'utils/mysql.class.php';
     include 'libraries/comments.class.php';
 
-    $commentsObj = new Comment();
-
-    $elementCount = $commentsObj->getCommentsCount();
-
-    $comments = $commentsObj->getCommentsList();
-
     $formErrors = [];
     $replyFormErrors = [];
     $data = [];

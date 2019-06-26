@@ -70,39 +70,6 @@
                 <div class="col">
                     <div id="comments-wrapper">
 
-                        <div class="comments-count">
-                            <h2><?php echo $elementCount ?> Comments</h2>
-                        </div>
-
-                        <?php
-
-                            foreach($comments as $key => $val) {
-
-                                echo '
-                                    <div id="comment-block-'. $val['id'] .'" data-id="'. $val['id'] .'">
-                                        <div class="comment-parent">
-                                            <span class="comment-name">'. $val['name'] .'</span> &nbsp; <small><span class="comment-date">'. $val['date'] .'</span></small>
-                                            <span class="comment-reply"><a href="javascript:showReplyForm('. $val['id'] .')"><i class="fas fa-reply"></i> Reply</a></span>
-                                            <p class="comment-text">'. $val['text'] .'</p>
-                                        </div>   
-                                    </div>
-                                ';
-
-                                $childComments = $commentsObj->getChildComments($val['id']);
-
-                                foreach ($childComments as $key2 => $val2) {
-
-                                    echo '
-                                    <div id="comment-'. $val2['id'] .'" class="comment-child">
-                                        <span class="comment-name">'. $val2['name'] .'</span> &nbsp; <small><span class="comment-date">'. $val2['date'] .'</span></small>
-                                        <p class="comment-text">'. $val2['text'] .'</p>
-                                    </div>
-                                ';
-                                }
-                            }
-
-                        ?>
-
                     </div>
 
                 </div>
@@ -124,6 +91,8 @@
 
             $(document).ready(function() {
 
+                displayAllComments();
+
                 $(document).on("click", "#reply", function() {
 
                     let email = $("#reply-email-input").val(),
@@ -142,8 +111,9 @@
                             "text": text,
                             "parent_id": parentId
                         },
-                        success: function(data){
+                        success: function(){
                             hideReplyForm();
+                            displayAllComments();
                         }
                     });
                 });
@@ -153,8 +123,19 @@
                 $("#comment-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
             });
 
-            function displayNewComment(){
+            function displayAllComments(){
 
+                $.ajax({
+                    url: "ajax_functions.php",
+                    type: "post",
+                    async: true,
+                    data: {
+                        "display": 1
+                    },
+                    success: function(data) {
+                        $("#comments-wrapper").html(data);
+                    }
+                });
             }
 
             function showReplyForm(commentId){
