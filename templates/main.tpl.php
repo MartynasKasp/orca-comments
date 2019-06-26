@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles/main.css"/>
 
         <script src="https://kit.fontawesome.com/1ef1bc7d46.js"></script>
 
@@ -27,24 +28,25 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="email-input">Email address <span class="required-field">*</span></label>
-                                    <input type="email" class="form-control" name="email" id="email-input" aria-describedby="email-error" placeholder="example@email.com" value="<?php echo isset($data['email']) ? $data['email'] : ''; ?>" required>
-                                    <!--<small id="email-error" class="form-text validation-error">Given email address is invalid.</small>-->
+                                    <input type="email" class="form-control" name="email" id="email-input" aria-describedby="email-error" placeholder="example@email.com">
+                                    <small id="email-error" class="form-text validation-error"></small>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="name-input">Name <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" name="name" id="name-input" aria-describedby="name-error" placeholder="John Smith" value="<?php echo isset($data['name']) ? $data['name'] : ''; ?>" required>
-                                    <!--<small id="name-error" class="validation-error form-text text-muted">Given name is too long.</small>-->
+                                    <input type="text" class="form-control" name="name" id="name-input" aria-describedby="name-error" placeholder="Enter a name">
+                                    <small id="name-error" class="validation-error form-text"></small>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="text-input">Comment <span class="required-field">*</span></label>
-                            <textarea class="form-control" id="text-input" name="text" placeholder="Type comment here..." rows="3" maxlength="1000" required><?php if(isset($data['text'])) echo $data['text']; ?></textarea>
-                            <span id="character-count" class="text-muted comment-length">Characters left: 1000</span>
+                            <textarea class="form-control" id="text-input" name="text" placeholder="Type comment here..." rows="3" maxlength="1000"></textarea>
+                            <small id="text-error" class="validation-error form-text float-left"></small>
+                            <span id="character-count" class="comment-length">Characters left: 1000</span>
                         </div>
-                        <input type="button" class="btn btn-danger" value="Comment" id="comment">
+                        <br><input type="button" class="btn btn-danger" value="Comment" id="comment"><br>
                     </form>
 
                 </div>
@@ -63,8 +65,6 @@
 
         </div>
 
-        <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        -->
         <script
                 src="https://code.jquery.com/jquery-3.4.1.js"
                 integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -72,137 +72,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
-
-            $(document).ready(function() {
-
-                displayAllComments();
-
-                $(document).on("click", "#reply", function() {
-
-                    let email = $("#reply-email-input").val(),
-                        name = $("#reply-name-input").val(),
-                        text = $("#reply-text-input").val(),
-                        parentId = $(this).attr("data-id");
-
-                    $.ajax({
-                        url: "ajax_functions.php",
-                        type: "post",
-                        async: true,
-                        data: {
-                            "comment": 1,
-                            "email": email,
-                            "name": name,
-                            "text": text,
-                            "parent_id": parentId
-                        },
-                        success: function(){
-                            hideReplyForm();
-                            displayAllComments();
-                        }
-                    });
-                });
-
-                $("#comment").click(function() {
-
-                    let email = $("#email-input").val(),
-                        name = $("#name-input").val(),
-                        text = $("#text-input").val();
-
-                    $.ajax({
-                        url: "ajax_requests.php",
-                        type: "post",
-                        async: true,
-                        data: {
-                            "comment": 1,
-                            "email": email,
-                            "name": name,
-                            "text": text
-                        },
-                        success: function(){
-                            displayAllComments();
-                            $("#email-input").val('');
-                            $("#name-input").val('');
-                            $("#text-input").val('');
-                        }
-                    });
-                });
-            });
-
-            $(document).on("keyup", "#text-input", function() {
-                $("#character-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
-            });
-
-            $(document).on("keyup", "#reply-text-input", function() {
-                $("#reply-character-count").text("Characters left: " + ($(this).attr("maxlength") - $(this).val().length));
-            });
-
-            function displayAllComments(){
-
-                $.ajax({
-                    url: "ajax_requests.php",
-                    type: "post",
-                    async: true,
-                    data: {
-                        "display": 1
-                    },
-                    success: function(data) {
-                        $("#comments-wrapper").html(data);
-                    }
-                });
-            }
-
-            function showReplyForm(commentId){
-
-                hideReplyForm();
-
-                let replyFormDiv = document.createElement("div"),
-                    //divText = document.createTextNode("Reply form should appear here"),
-                    elementId = "comment-block-" + commentId;
-
-                replyFormDiv.setAttribute('id', 'reply-form');
-                document.getElementById(elementId).appendChild(replyFormDiv);
-
-                replyFormDiv = document.getElementById('reply-form');
-
-                let divText = `
-                    <form action="" method="post">
-                        <div class="form-row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="reply-email-input">Email address <span class="required-field">*</span></label>
-                                    <input type="email" class="form-control" name="email" id="reply-email-input" aria-describedby="email-error" placeholder="example@email.com" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="reply-name-input">Name <span class="required-field">*</span></label>
-                                    <input type="text" class="form-control" name="name" id="reply-name-input" aria-describedby="name-error" placeholder="John Smith" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="reply-text-input">Comment <span class="required-field">*</span></label>
-                            <textarea class="form-control" id="reply-text-input" name="text" placeholder="Type reply to comment here..." rows="3" maxlength="1000" required></textarea>
-                            <span id="reply-character-count" class="text-muted comment-length">Characters left: 1000</span>
-                        </div>
-                        <input type="button" class="btn btn-danger" value="Reply" id="reply" data-id="${commentId}">
-
-                    </form>
-                    `;
-
-                replyFormDiv.insertAdjacentHTML('beforeend', divText);
-            }
-
-            function hideReplyForm() {
-
-                //<input type="submit" class="btn btn-danger" value="Reply" id="reply" data-id="${commentId}">
-
-                let searchForOpen = document.getElementById('reply-form');
-                if(searchForOpen) {
-                    searchForOpen.parentNode.removeChild(searchForOpen);
-                }
-            }
-        </script>
+        <script type="text/javascript" src="scripts/main.js"></script>
     </body>
 </html>

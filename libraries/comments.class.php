@@ -18,24 +18,6 @@ class Comment
         return $data[0]['count'];
     }
 
-    /*public function insertComment($data)
-    {
-        $query = "  INSERT INTO {$this->comments_table}
-                    (
-                        email,
-                        name,
-                        text,
-                        date
-                    ) VALUES (
-                        '{$data['email']}',
-                        '{$data['name']}',
-                        '{$data['text']}',
-                        '{$data['date']}'
-                    )";
-
-        mysql::query($query);
-    }*/
-
     public function insertComment($email, $name, $text)
     {
         $query = "  INSERT INTO {$this->comments_table}
@@ -51,7 +33,7 @@ class Comment
                         '". date("Y-m-d") ."'
                     )";
 
-        mysql::query($query) or die(mysql::error());
+        mysql::query($query);
     }
 
     public function insertChildComment($email, $name, $text, $parentId)
@@ -71,7 +53,7 @@ class Comment
                         '{$parentId}'
                     )";
 
-        mysql::query($query) or die(mysql::error());
+        mysql::query($query);
     }
 
     public function getCommentsList()

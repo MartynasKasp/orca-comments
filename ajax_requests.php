@@ -41,7 +41,7 @@
                     <div id="comment-block-'. $val['id'] .'" data-id="'. $val['id'] .'">
                         <div class="comment-parent">
                             <span class="comment-name">'. $val['name'] .'</span> &nbsp; <small><span class="comment-date">'. $val['date'] .'</span></small>
-                            <span class="comment-reply"><a href="javascript:showReplyForm('. $val['id'] .')"><i class="fas fa-reply"></i> Reply</a></span>
+                            <span class="comment-reply"><a href="javascript:;" onclick="javascript:showReplyForm('. $val['id'] .')"><i class="fas fa-reply"></i> Reply</a></span>
                             <p class="comment-text">'. $val['text'] .'</p>
                         </div>   
                     </div>
