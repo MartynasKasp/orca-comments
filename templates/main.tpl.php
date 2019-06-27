@@ -17,7 +17,18 @@
         <title>Comments system</title>
     </head>
     <body>
-        <div class="container mt-5 mb-5">
+        <div class="container mt-3 mb-5">
+
+            <!-- Disclaimer -->
+
+            <div class="row mb-2 d-flex justify-content-center">
+                <div class="col-10 col-lg-8">
+                    <div class="alert alert-warning alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Disclaimer!</strong> Because this is a live server and anyone can access this page, I do not take any responsibility for the posted comments.
+                    </div>
+                </div>
+            </div>
 
             <!-- Input form -->
 
