@@ -12,6 +12,7 @@
         $email = mysql::escape($_POST['email']);
         $name = mysql::escape($_POST['name']);
         $text = mysql::escape($_POST['text']);
+        $text = strip_tags($text);
 
         if(isset($_POST['parent_id'])) {
             $commentsObj->insertChildComment(
