@@ -164,6 +164,15 @@ $(document).ready(function() {
     });
 });
 
+(function($) {
+    $.fn.goTo = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top + 'px'
+        }, 'slow');
+        return this;
+    }
+})(jQuery);
+
 function displayAllComments(){
 
     $.ajax({
@@ -222,6 +231,7 @@ function showReplyForm(commentId){
                     `;
 
     replyFormDiv.insertAdjacentHTML('beforeend', divText);
+    $("#" + elementId).goTo();
 }
 
 function hideReplyForm() {
