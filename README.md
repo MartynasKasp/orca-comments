@@ -1,3 +1,5 @@
 # orca-comments
-Comment system task for ORCA TEAM  
-URL: http://comments.martynaskasp.lt/
+Comments system made with plain PHP, no frameworks.
+This project was made as an intership task.
+
+[Demo](https://martynaskasp.lt/demos/comments)
